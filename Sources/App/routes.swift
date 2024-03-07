@@ -6,10 +6,15 @@ func routes(_ app: Application) throws {
         try await req.view.render("index", ["title": "Hello Vapor!"])
     }
 
-    app.get("hello", ":name") { req async throws -> String in
+    app.get("json", ":name") { req async throws -> UserResponse in
         let name = try req.parameters.require("name")
-        return "Hello, \(name.capitalized)!"
+        let message = "Hello, \(name.capitalized)!"
+        return UserResponse(message: message)
     }
 
     try app.register(collection: TodoController())
+}
+
+struct UserResponse: Content {
+    let message: String
 }
