@@ -21,6 +21,10 @@ public func configure(_ app: Application) async throws {
     app.migrations.add(CreateTodo())
 
     app.views.use(.leaf)
+    
+    /// add middleware to access public directory file
+    let fileMiddleware = FileMiddleware(publicDirectory: app.directory.publicDirectory)
+    app.middleware.use(fileMiddleware)
 
 
     // register routes
