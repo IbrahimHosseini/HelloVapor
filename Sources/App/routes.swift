@@ -25,6 +25,7 @@ func routes(_ app: Application) throws {
     try app.register(collection: TodoController())
 }
 
+// MARK: models 
 struct UserResponse: Content {
     let message: String
 }
